@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .choices {
+            margin: 10px 0;
+        }
+
+        .choice-label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-container">
+        <h1><%= question.text %></h1>
+        <form action="/submit-answer" method="post">
+            <div class="choices">
+                <% question.choices.forEach((choice, index) => { %>
+                <label class="choice-label">
+                    <input type="radio" name="answer" value="<%= choice %>" id="choice<%= index %>">
+                    <%= choice %>
+                </label>
+                <% }) %>
+            </div>
+            <input type="hidden" name="questionIndex" value="<%= questionIndex %>">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+
+</html>
